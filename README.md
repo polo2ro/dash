@@ -1,2 +1,1 @@
-# dash
-dash button
+# amazon dash button

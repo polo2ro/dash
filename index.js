@@ -3,12 +3,12 @@
 const dashButton = require('node-dash-button');
 const Mopidy = require("mopidy");
 
-let dash = dashButton("34:d2:70:bc:5b:fc", 'eth0'); //address from step above
+let dash = dashButton(process.argv[2], 'eth0'); //address from step above
 dash.on("detected", function() {
 
     let host = 'localhost';
-    if (undefined !== process.argv[2]) {
-        host = process.argv[2];
+    if (undefined !== process.argv[3]) {
+        host = process.argv[3];
     }
 
     let mopidy = new Mopidy({

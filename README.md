@@ -2,6 +2,7 @@
 
 Go to next track on your mopidy server with the amazon dash button
 
+To configure your dash button, use the guide from the [node-dash-button](https://github.com/hortinstein/node-dash-button) library. 
 
 ## Install on debian
 
@@ -10,19 +11,28 @@ cd /home/paul/git
 git clone https://github.com/polo2ro/dash
 ```
 
-Start the service
-
-Warning, the service file contain path to the js files, this must be modified
-to match your username, your repository folder, and the hostname used by
-mopidy.
+Create the systemd service
 
 ```bash
 su
 cp dash/systemd/dash.service /etc/systemd/system/
+nano /etc/systemd/system/dash.service
+```
+
+The service file contain custom informations, this must be modified
+to match:
+* your username
+* your repository folder
+* The MAC address of your dash button
+* the hostname used by mopidy (optional argument, default is localhost)
+
+Start the service:
+
+```bash
 systemctl start dash.service
 ```
 
-Enable for next reboot
+Enable for next reboot:
 
 ```bash
 systemctl enable dash.service

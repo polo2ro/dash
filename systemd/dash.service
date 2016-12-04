@@ -1,0 +1,12 @@
+[Unit]
+Description=Amazon dash button
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/home/paul/git/dash
+ExecStart=/usr/bin/nodejs index.js pce.local
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target

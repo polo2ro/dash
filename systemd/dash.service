@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/home/paul/git/dash
-ExecStart=/usr/bin/nodejs index.js "34:d2:70:bc:5b:fc" pce.local
+ExecStart=/usr/bin/nodejs index.js "34:d2:70:bc:5b:fc"
 StandardOutput=syslog
 
 [Install]

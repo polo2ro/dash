@@ -1,8 +1,8 @@
 # Amazon dash button for mopidy
 
-Go to next track on your mopidy server with the amazon dash button
+Go to next track or play/pause on your mopidy server with the amazon dash button
 
-To configure your dash button, use the guide from the [node-dash-button](https://github.com/hortinstein/node-dash-button) library. 
+To configure your dash button, use the guide from the [node-dash-button](https://github.com/hortinstein/node-dash-button) library.
 
 ## Install on debian
 
@@ -21,10 +21,10 @@ nano /etc/systemd/system/dash.service
 
 The service file contain custom informations, this must be modified
 to match:
-* your username
 * your repository folder
 * The MAC address of your dash button
-* the hostname used by mopidy (optional argument, default is localhost)
+* the hostname and port used by mopidy (optional argument, default is localhost:6680)
+* Name of interface (optional argument, default is eth0)
 
 Start the service:
 

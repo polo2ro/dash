@@ -3,20 +3,43 @@
 const dashButton = require('node-dash-button');
 const Mopidy = require("mopidy");
 
-let dash = dashButton(process.argv[2], 'eth0'); //address from step above
+let mac = process.argv[2];
+
+if (undefined === mac || null === mac) {
+    throw new Error('mac address is a mandatory parameter');
+}
+
+let host = 'localhost:6680';
+if (undefined !== process.argv[4]) {
+    host = process.argv[4];
+}
+
+let iface = 'eth0';
+if (undefined !== process.argv[3]) {
+    iface = process.argv[3];
+}
+
+
+let mopidy = new Mopidy({
+    autoConnect: false,
+    webSocketUrl: 'ws://'+host+'/mopidy/ws/',
+    callingConvention: 'by-position-or-by-name'
+});
+
+let dash = dashButton(process.argv[2], iface);
 dash.on("detected", function() {
 
-    let host = 'localhost';
-    if (undefined !== process.argv[3]) {
-        host = process.argv[3];
-    }
-
-    let mopidy = new Mopidy({
-        webSocketUrl: 'ws://'+host+':6680/mopidy/ws/',
-        callingConvention: 'by-position-or-by-name'
-    });
-
+    mopidy.connect();
     mopidy.on("state:online", function () {
-        mopidy.playback.next();
+
+        mopidy.playback.getState().done(state => {
+            if ('playing' === state) {
+                mopidy.playback.pause();
+            } else {
+                mopidy.playback.next();
+                mopidy.playback.play();
+            }
+        });
+        mopidy.close();
     });
 });

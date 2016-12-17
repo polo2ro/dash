@@ -1,6 +1,6 @@
 # Amazon dash button for mopidy
 
-Go to next track or play/pause on your mopidy server with the amazon dash button
+Pause/play and go to next track on your mopidy server with the amazon dash button
 
 To configure your dash button, use the guide from the [node-dash-button](https://github.com/hortinstein/node-dash-button) library.
 
